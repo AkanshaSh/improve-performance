@@ -12,6 +12,13 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.IntStream;
+
 @Slf4j
 @Service
 public class NumberService {
@@ -41,7 +48,32 @@ public class NumberService {
 
     public Integer findSmallestDuplicateImproved(List<Integer> data) {
         
-        throw new UnsupportedOperationException("Not implemented.");
+          Integer minDuplicate=null;     
+		  Set<Integer> dataSet= new HashSet<Integer>(); 
+		  Integer prevMinDuplicate=null;
+		  boolean isFirstCheck=true;
+		  int count=0;
+		  for(Integer d:data) {
+		  if(!dataSet.add(d))
+		  {
+			++count;
+			if(isFirstCheck) 
+		  	{ 
+			prevMinDuplicate=d;
+		  	isFirstCheck=false; 
+		  	} 
+		  if(d.compareTo(prevMinDuplicate)<=0) {
+			  minDuplicate= d; 
+		  }
+		  prevMinDuplicate=minDuplicate; 
+		  }
+		  
+		  if(count==2)
+			  break;
+		  
+		 
+		  }             
+       return minDuplicate;
 
     }
 
